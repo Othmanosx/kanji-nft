@@ -13,7 +13,7 @@ const theme = {
     Input: {
       styles: (theme: MantineTheme) => ({
         input: {
-          boxShadow: theme.shadows.sm,
+          boxShadow: theme.shadows.xs,
         },
       }),
     },

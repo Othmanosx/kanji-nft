@@ -1,25 +1,28 @@
-import {
-  Button,
-  Grid,
-  Group,
-  Input,
-  Text,
-  TextInput,
-  Title,
-} from "@mantine/core"
+import { Button, Group, Input, Text, Title } from "@mantine/core"
 import { IconSearch } from "@tabler/icons"
+import { useStore } from "store"
 
-type Props = {}
+export default function ActionBar() {
+  const NFTList = useStore((state) => state.NFTList)
+  const search = useStore((state) => state.search)
+  const setSearch = useStore((state) => state.setSearch)
 
-export default function ActionBar({}: Props) {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.target.value)
+
   return (
     <Group position="apart" mb="md">
       <div>
         <Title order={2}>Cool Cats</Title>
-        <Text color="gray">354 NFTs Uploaded</Text>
+        <Text color="gray">{NFTList?.length} NFTs Uploaded</Text>
       </div>
       <Group>
-        <Input icon={<IconSearch />} placeholder="Search..." />
+        <Input
+          value={search}
+          onChange={handleSearch}
+          icon={<IconSearch />}
+          placeholder="Search..."
+        />
         <Button variant="default">Edit properties</Button>
       </Group>
     </Group>
