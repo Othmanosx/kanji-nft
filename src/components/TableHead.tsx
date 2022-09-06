@@ -1,10 +1,4 @@
-import {
-  UnstyledButton,
-  Group,
-  Center,
-  Text,
-  createStyles,
-} from "@mantine/core"
+import { UnstyledButton, Group, Text, createStyles } from "@mantine/core"
 import { IconChevronUp, IconChevronDown, IconSelector } from "@tabler/icons"
 import { ThProps } from "types"
 
@@ -30,11 +24,11 @@ export default function Th({ children, reversed, sorted, onSort }: ThProps) {
   return (
     <th className={classes.th}>
       <UnstyledButton onClick={onSort} className={classes.control}>
-        <Group position="apart">
+        <Group>
           <Text weight={500} size="sm">
             {children}
           </Text>
-          {onSort ? <Icon size={14} stroke={1.5} /> : null}
+          {onSort ? <Icon size={20} stroke={1.5} /> : null}
         </Group>
       </UnstyledButton>
     </th>

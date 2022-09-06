@@ -1,6 +1,7 @@
-import { Group, Checkbox, Avatar, Badge, Text } from "@mantine/core"
+import { Group, Checkbox, Avatar, Badge, useMantineTheme } from "@mantine/core"
 import { useStore } from "store"
 import { NFTItem } from "types"
+import Empty from "./Empty"
 
 type Props = {
   rows: NFTItem[]
@@ -9,6 +10,7 @@ type Props = {
 function TableBody({ rows }: Props) {
   const selection = useStore((state) => state.selection)
   const setSelection = useStore((state) => state.setSelection)
+  const theme = useMantineTheme()
 
   const toggleRow = (id: number) =>
     setSelection(
@@ -16,11 +18,28 @@ function TableBody({ rows }: Props) {
         ? selection.filter((item) => item !== id)
         : [...selection, id]
     )
+  const getProperties = (row: NFTItem) => {
+    const properties = Object.keys(row.properties)
+    if (properties.length > 0) return Object.keys(row.properties).join(" | ")
+    return "--"
+  }
+  const getValues = (row: NFTItem) => {
+    const properties = Object.values(row.properties)
+    if (properties.length > 0) return Object.keys(row.properties).join(" | ")
+    return "--"
+  }
   return (
     <tbody>
       {rows.length > 0 ? (
         rows.map((row) => (
-          <tr key={row.id}>
+          <tr
+            key={row.id}
+            style={{
+              backgroundColor: selection.includes(row.id)
+                ? theme.colors.gray[1]
+                : "",
+            }}
+          >
             <td>
               <Group noWrap>
                 <Checkbox
@@ -29,30 +48,24 @@ function TableBody({ rows }: Props) {
                   transitionDuration={80}
                 />
                 <Avatar src={row.image} alt="cool cat photo" />
-                {row.item}
+                {row.item || "--"}
               </Group>
             </td>
-            <td>{Object.keys(row.properties).join(" | ")}</td>
-            <td>{Object.values(row.properties).join(" | ")}</td>
+            <td>{getProperties(row)}</td>
+            <td>{getValues(row)}</td>
             <td>
               <Badge
                 color={row.status === "Complete" ? "cyan" : "pink"}
                 radius="sm"
                 sx={{ width: "80px" }}
               >
-                {row.status}
+                {row.status || "--"}
               </Badge>
             </td>
           </tr>
         ))
       ) : (
-        <tr>
-          <td colSpan={4}>
-            <Text weight={500} align="center">
-              Nothing found
-            </Text>
-          </td>
-        </tr>
+        <Empty />
       )}
     </tbody>
   )

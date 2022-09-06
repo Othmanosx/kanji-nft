@@ -34,6 +34,15 @@ const theme: MantineThemeOverride = {
         },
       }),
     },
+    Table: {
+      styles: (theme: MantineTheme) => ({
+        root: {
+          "tr:hover": {
+            backgroundColor: theme.colors.gray[1],
+          },
+        },
+      }),
+    },
   },
 }
 
