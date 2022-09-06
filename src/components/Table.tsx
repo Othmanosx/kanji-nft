@@ -1,13 +1,16 @@
 import { useState } from "react"
-import { Table, ScrollArea, Text, Badge, Avatar, Group } from "@mantine/core"
+import { Table, ScrollArea, Group, Checkbox } from "@mantine/core"
 import { NFTItem } from "types"
 import { useStore } from "store"
 import { sortData } from "utils"
 import Th from "./TableHead"
+import TableBody from "./TableBody"
 
 export default function TableSort() {
   const search = useStore((state) => state.search)
   const data = useStore((state) => state.NFTList)
+  const selection = useStore((state) => state.selection)
+  const setSelection = useStore((state) => state.setSelection)
   const [sortBy, setSortBy] = useState<keyof NFTItem | null>(null)
   const [reverseSortDirection, setReverseSortDirection] = useState(false)
 
@@ -23,6 +26,12 @@ export default function TableSort() {
     search: search,
   })
 
+  const toggleAll = () => {
+    setSelection(
+      selection.length === rows.length ? [] : rows.map((item) => item.id)
+    )
+  }
+
   return (
     <ScrollArea>
       <Table
@@ -37,7 +46,18 @@ export default function TableSort() {
               reversed={reverseSortDirection}
               onSort={() => setSorting("item")}
             >
-              ITEM
+              <Group>
+                <Checkbox
+                  onClick={(e) => e.stopPropagation()}
+                  onChange={toggleAll}
+                  checked={selection.length === rows.length && rows.length > 0}
+                  indeterminate={
+                    selection.length > 0 && selection.length !== rows.length
+                  }
+                  transitionDuration={80}
+                />
+                ITEM
+              </Group>
             </Th>
             <Th>PROPERTIES</Th>
             <Th>VALUES</Th>
@@ -50,39 +70,7 @@ export default function TableSort() {
             </Th>
           </tr>
         </thead>
-        <tbody>
-          {rows.length > 0 ? (
-            rows.map((row) => (
-              <tr key={row.id}>
-                <td>
-                  <Group noWrap>
-                    <Avatar src={row.image} alt="cool cat photo" />
-                    {row.item}
-                  </Group>
-                </td>
-                <td>{Object.keys(row.properties).join(" | ")}</td>
-                <td>{Object.values(row.properties).join(" | ")}</td>
-                <td>
-                  <Badge
-                    color={row.status === "Complete" ? "cyan" : "pink"}
-                    radius="sm"
-                    sx={{ width: "110px" }}
-                  >
-                    {row.status}
-                  </Badge>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={4}>
-                <Text weight={500} align="center">
-                  Nothing found
-                </Text>
-              </td>
-            </tr>
-          )}
-        </tbody>
+        <TableBody rows={rows} />
       </Table>
     </ScrollArea>
   )

@@ -7,7 +7,7 @@ export default function App() {
   return (
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
       <Container>
-        <Card shadow="sm" p="lg" m="xl" radius="md" withBorder>
+        <Card shadow="sm" p="none" m="xl" radius="md" withBorder>
           <ActionBar />
           <Table />
         </Card>

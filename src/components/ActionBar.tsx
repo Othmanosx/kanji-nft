@@ -11,7 +11,7 @@ export default function ActionBar() {
     setSearch(e.target.value)
 
   return (
-    <Group position="apart" mb="md">
+    <Group position="apart" mb="md" p="lg">
       <div>
         <Title order={2}>Cool Cats</Title>
         <Text color="gray">{NFTList?.length} NFTs Uploaded</Text>
