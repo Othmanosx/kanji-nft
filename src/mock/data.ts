@@ -10,7 +10,7 @@ const data: NFTItem[] = [
       Rarity: ["Rare"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-1.png",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const data: NFTItem[] = [
       Rarity: ["Common"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-2.png",
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const data: NFTItem[] = [
       Rarity: ["Rare"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-3.png",
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const data: NFTItem[] = [
       Rarity: ["Very Rare"],
     },
     status: "Incomplete",
-    image: "",
+    image: "/src/assets/cat-4.png",
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const data: NFTItem[] = [
       Rarity: ["Common"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-5.png",
   },
   {
     id: 6,
@@ -65,7 +65,7 @@ const data: NFTItem[] = [
       Rarity: ["Common"],
     },
     status: "Incomplete",
-    image: "",
+    image: "/src/assets/cat-6.png",
   },
   {
     id: 7,
@@ -76,7 +76,7 @@ const data: NFTItem[] = [
       Rarity: ["Rare"],
     },
     status: "Incomplete",
-    image: "",
+    image: "/src/assets/cat-7.png",
   },
   {
     id: 8,
@@ -87,7 +87,7 @@ const data: NFTItem[] = [
       Rarity: ["Rare"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-8.png",
   },
   {
     id: 9,
@@ -98,7 +98,7 @@ const data: NFTItem[] = [
       Rarity: ["Very Rare"],
     },
     status: "Incomplete",
-    image: "",
+    image: "/src/assets/cat-9.png",
   },
   {
     id: 10,
@@ -109,7 +109,7 @@ const data: NFTItem[] = [
       Rarity: ["Very Rare"],
     },
     status: "Complete",
-    image: "",
+    image: "/src/assets/cat-10.png",
   },
 ]
 

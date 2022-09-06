@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Table, ScrollArea, Text, Badge } from "@mantine/core"
+import { Table, ScrollArea, Text, Badge, Avatar, Group } from "@mantine/core"
 import { NFTItem } from "types"
 import { useStore } from "store"
 import { sortData } from "utils"
@@ -54,13 +54,19 @@ export default function TableSort() {
           {rows.length > 0 ? (
             rows.map((row) => (
               <tr key={row.id}>
-                <td>{row.item}</td>
+                <td>
+                  <Group noWrap>
+                    <Avatar src={row.image} alt="cool cat photo" />
+                    {row.item}
+                  </Group>
+                </td>
                 <td>{Object.keys(row.properties).join(" | ")}</td>
                 <td>{Object.values(row.properties).join(" | ")}</td>
                 <td>
                   <Badge
                     color={row.status === "Complete" ? "cyan" : "pink"}
                     radius="sm"
+                    sx={{ width: "110px" }}
                   >
                     {row.status}
                   </Badge>
