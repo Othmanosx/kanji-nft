@@ -13,7 +13,7 @@ export function sortData(
   data: NFTItem[],
   payload: { sortBy: keyof NFTItem | null; reversed: boolean; search: string }
 ) {
-  const { sortBy } = payload
+  const { sortBy = "item" } = payload
 
   if (sortBy === "item" || sortBy === "status") {
     return filterData(

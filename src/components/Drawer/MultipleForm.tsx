@@ -25,6 +25,8 @@ export default function MultipleForm({ NFTItemList }: Props) {
   const { form, setProperty, addProperty, removeProperty } = useSingleForm({
     properties: [{ id: Math.random(), name: "", value: "" }],
     id: Math.random(),
+    item: "",
+    status: "Incomplete",
   })
   const { errors, validate } = useValidation(form, true)
 

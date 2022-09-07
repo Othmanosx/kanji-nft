@@ -1,7 +1,7 @@
 export interface NFTItem {
   id: number
-  item?: string
-  status?: string
+  item: string
+  status: string
   properties: {
     id: number
     name: string
