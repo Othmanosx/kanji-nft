@@ -4,6 +4,7 @@ import create from "zustand"
 
 interface Store {
   NFTList: NFTItem[]
+  setSingleNFTItem: (NFTitem: NFTItem) => void
   search: string
   setSearch: (term: string) => void
   selection: number[]
@@ -16,6 +17,16 @@ interface Store {
 
 export const useStore = create<Store>((set) => ({
   NFTList: data,
+  setSingleNFTItem: (NFTitem: NFTItem) =>
+    set((state) => {
+      const newList = state.NFTList.map((item) =>
+        item.id === NFTitem.id ? NFTitem : item
+      )
+      return {
+        ...state,
+        NFTList: newList,
+      }
+    }),
   search: "",
   setSearch: (term: string) =>
     set((state) => ({
