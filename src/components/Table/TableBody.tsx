@@ -53,6 +53,7 @@ function TableBody({ rows }: Props) {
             <td>
               <Group noWrap>
                 <Checkbox
+                  onClick={(e) => e.stopPropagation()}
                   checked={selection.includes(row.id)}
                   onChange={() => toggleRow(row.id)}
                   transitionDuration={80}

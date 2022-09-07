@@ -5,6 +5,7 @@ import create from "zustand"
 interface Store {
   NFTList: NFTItem[]
   setSingleNFTItem: (NFTitem: NFTItem) => void
+  setMultipleNFTItem: (NFTitem: NFTItem) => void
   search: string
   setSearch: (term: string) => void
   selection: number[]
@@ -20,8 +21,25 @@ export const useStore = create<Store>((set) => ({
   setSingleNFTItem: (NFTitem: NFTItem) =>
     set((state) => {
       const newList = state.NFTList.map((item) =>
-        item.id === NFTitem.id ? NFTitem : item
+        item.id === NFTitem.id ? { ...NFTitem, status: "Complete" } : item
       )
+      return {
+        ...state,
+        NFTList: newList,
+      }
+    }),
+  setMultipleNFTItem: (NFTitem: NFTItem) =>
+    set((state) => {
+      const newProperties = NFTitem.properties
+      const newList = state.NFTList.map((item) => {
+        if (item.id && state.selection.includes(item.id))
+          return {
+            ...item,
+            status: "Complete",
+            properties: newProperties,
+          }
+        return item
+      })
       return {
         ...state,
         NFTList: newList,
@@ -45,9 +63,10 @@ export const useStore = create<Store>((set) => ({
     set((state) => ({
       ...state,
       isDrawerOpen: !state.isDrawerOpen,
+      drawerItem: state.isDrawerOpen ? null : state.drawerItem,
     })),
   drawerItem: null,
-  setDrawerItem: (id: number) =>
+  setDrawerItem: (id?: number) =>
     set((state) => ({
       ...state,
       drawerItem: id,

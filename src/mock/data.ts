@@ -1,4 +1,4 @@
-import { NFTItem } from "types"
+import { NFTItem, Values } from "types"
 
 const data: NFTItem[] = [
   {
@@ -105,4 +105,12 @@ const data: NFTItem[] = [
     image: "/src/assets/cat-10.png",
   },
 ]
+
+export const properties = ["Eyes", "Hair", "Rarity"]
+export const values: Values = {
+  Eyes: ["Black", "Green", "Blue"],
+  Hair: ["Blond", "Ginger", "Black", "Brown"],
+  Rarity: ["Rare", "Very Rare", "Common"],
+}
+
 export default data

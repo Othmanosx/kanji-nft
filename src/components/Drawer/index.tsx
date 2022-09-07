@@ -13,7 +13,9 @@ export default function DrawerComponent() {
 
   const NFTItem = NFTList.find((item) => item.id === drawerItem)
   const NFTItemList = NFTList.filter((item) => selection.includes(item.id))
-
+  const title = NFTItem?.item
+    ? NFTItem?.item
+    : `Edit ${NFTItemList.length} NFTs`
   return (
     <Drawer
       opened={isDrawerOpen}
@@ -22,11 +24,11 @@ export default function DrawerComponent() {
       size="xl"
       position="right"
     >
-      <DrawerHead title={NFTItem?.item || "Edit Item"} />
-      {NFTItemList.length > 0 ? (
-        <MultipleForm NFTItemList={NFTItemList} />
-      ) : (
+      <DrawerHead title={title} />
+      {NFTItem ? (
         <SingleForm NFTItem={NFTItem} />
+      ) : (
+        <MultipleForm NFTItemList={NFTItemList} />
       )}
     </Drawer>
   )

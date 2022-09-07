@@ -7,6 +7,7 @@ export default function ActionBar() {
   const search = useStore((state) => state.search)
   const setSearch = useStore((state) => state.setSearch)
   const selection = useStore((state) => state.selection)
+  const toggleDrawer = useStore((state) => state.toggleDrawer)
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value)
@@ -25,7 +26,9 @@ export default function ActionBar() {
           placeholder="Search..."
         />
         {selection.length > 0 && (
-          <Button variant="default">Edit properties</Button>
+          <Button variant="default" onClick={toggleDrawer}>
+            Edit properties
+          </Button>
         )}
       </Group>
     </Group>

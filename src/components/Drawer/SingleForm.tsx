@@ -1,22 +1,21 @@
 import {
   ActionIcon,
   Alert,
+  Box,
   Button,
   Group,
   Select,
   TextInput,
 } from "@mantine/core"
 import { IconAlertCircle, IconPlus, IconTrash } from "@tabler/icons"
-import useSingleForm from "hooks/useSingleForm"
+import useSingleForm from "hooks/useForm"
 import useValidation from "hooks/useValidation"
+import { properties, values } from "mock/data"
 import { useStore } from "store"
 import { NFTItem } from "types"
 
 interface Props {
   NFTItem: NFTItem | undefined
-}
-interface Values {
-  [key: string]: string[]
 }
 
 function SingleForm({ NFTItem }: Props) {
@@ -27,12 +26,6 @@ function SingleForm({ NFTItem }: Props) {
   const toggleDrawer = useStore((state) => state.toggleDrawer)
   const setSingleNFTItem = useStore((state) => state.setSingleNFTItem)
 
-  const properties = ["Eyes", "Hair", "Rarity"]
-  const values: Values = {
-    Eyes: ["Black", "Green", "Blue"],
-    Hair: ["Blond", "Ginger", "Black", "Brown"],
-    Rarity: ["Rare", "Very Rare", "Common"],
-  }
   const formProperties = form?.properties || []
 
   const submitChanges = () => {
@@ -42,12 +35,12 @@ function SingleForm({ NFTItem }: Props) {
   }
 
   return (
-    <form>
+    <Box component="form" p={16}>
       <TextInput
         value={form?.item}
         onChange={(e) => setName(e.target.value)}
-        p={16}
         label="Name"
+        pb={8}
         placeholder="Type item name..."
         error={errors.nameError}
         required
@@ -56,7 +49,7 @@ function SingleForm({ NFTItem }: Props) {
         <Group
           key={property.name}
           spacing="xs"
-          px={16}
+          py={8}
           position="apart"
           align="end"
           noWrap
@@ -89,21 +82,21 @@ function SingleForm({ NFTItem }: Props) {
       ))}
       {errors.propertyError && (
         <Alert
-          m={16}
+          my={16}
           icon={<IconAlertCircle size={16} />}
           title="Oops!"
           color="red"
         >
-          Please make sure to enter all the properties data correctly.
+          {errors.propertyError}
         </Alert>
       )}
       {formProperties?.length < 3 && (
-        <Group p={16} onClick={addProperty}>
+        <Group spacing={6} onClick={addProperty}>
           <IconPlus size={20} />
           Property
         </Group>
       )}
-      <Group p={16}>
+      <Group py={16}>
         <Button
           variant="light"
           color="gray"
@@ -116,7 +109,7 @@ function SingleForm({ NFTItem }: Props) {
           Save
         </Button>
       </Group>
-    </form>
+    </Box>
   )
 }
 
