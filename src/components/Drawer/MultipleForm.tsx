@@ -109,9 +109,15 @@ export default function MultipleForm({ NFTItemList }: Props) {
           </ActionIcon>
         </Group>
       ))}
+      {formProperties?.length < 3 && (
+        <Group py={16} spacing={6} onClick={addProperty}>
+          <IconPlus size={20} />
+          Property
+        </Group>
+      )}
       {errors.propertyError && (
         <Alert
-          m={16}
+          my={16}
           icon={<IconAlertCircle size={16} />}
           title="Oops!"
           color="red"
@@ -119,13 +125,7 @@ export default function MultipleForm({ NFTItemList }: Props) {
           {errors?.propertyError}
         </Alert>
       )}
-      {formProperties?.length < 3 && (
-        <Group p={16} spacing={6} onClick={addProperty}>
-          <IconPlus size={20} />
-          Property
-        </Group>
-      )}
-      <Group p={16}>
+      <Group py={16}>
         <Button
           variant="light"
           color="gray"
