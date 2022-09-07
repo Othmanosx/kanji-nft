@@ -1,5 +1,6 @@
 import { Card, Container, MantineProvider } from "@mantine/core"
 import ActionBar from "components/ActionBar"
+import DrawerComponent from "components/Drawer"
 import Table from "components/Table"
 import theme from "./theme"
 
@@ -12,6 +13,7 @@ export default function App() {
           <Table />
         </Card>
       </Container>
+      <DrawerComponent />
     </MantineProvider>
   )
 }

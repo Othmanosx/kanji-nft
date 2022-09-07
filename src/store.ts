@@ -8,6 +8,10 @@ interface Store {
   setSearch: (term: string) => void
   selection: number[]
   setSelection: (selection: number[]) => void
+  isDrawerOpen: boolean
+  toggleDrawer: () => void
+  drawerItem: number | null
+  setDrawerItem: (id: number) => void
 }
 
 export const useStore = create<Store>((set) => ({
@@ -24,5 +28,17 @@ export const useStore = create<Store>((set) => ({
     set((state) => ({
       ...state,
       selection,
+    })),
+  isDrawerOpen: false,
+  toggleDrawer: () =>
+    set((state) => ({
+      ...state,
+      isDrawerOpen: !state.isDrawerOpen,
+    })),
+  drawerItem: null,
+  setDrawerItem: (id: number) =>
+    set((state) => ({
+      ...state,
+      drawerItem: id,
     })),
 }))

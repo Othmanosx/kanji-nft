@@ -3,10 +3,10 @@ export interface NFTItem {
   item: string
   status: "Complete" | "Incomplete"
   properties: {
-    ["Eyes"]?: Array<"Green" | "Black" | "Blue">
-    ["Hair"]?: Array<"Blond" | "Ginger" | "Black" | "Brown">
-    ["Rarity"]?: Array<"Rare" | "Very Rare" | "Common">
-  }
+    id: number
+    name: string
+    value: string
+  }[]
   image: string
 }
 export interface ThProps {

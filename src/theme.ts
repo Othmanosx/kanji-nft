@@ -34,6 +34,13 @@ const theme: MantineThemeOverride = {
         },
       }),
     },
+    ActionIcon: {
+      styles: (theme: MantineTheme) => ({
+        root: {
+          borderRadius: theme.radius.md,
+        },
+      }),
+    },
     Table: {
       styles: (theme: MantineTheme) => ({
         root: {

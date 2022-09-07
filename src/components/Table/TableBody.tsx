@@ -10,6 +10,9 @@ type Props = {
 function TableBody({ rows }: Props) {
   const selection = useStore((state) => state.selection)
   const setSelection = useStore((state) => state.setSelection)
+  const setDrawerItem = useStore((state) => state.setDrawerItem)
+  const toggleDrawer = useStore((state) => state.toggleDrawer)
+
   const theme = useMantineTheme()
 
   const toggleRow = (id: number) =>
@@ -19,14 +22,20 @@ function TableBody({ rows }: Props) {
         : [...selection, id]
     )
   const getProperties = (row: NFTItem) => {
-    const properties = Object.keys(row.properties)
-    if (properties.length > 0) return Object.keys(row.properties).join(" | ")
+    const properties = row.properties
+    if (properties.length > 0)
+      return properties.map((item) => item.name).join(" | ")
     return "--"
   }
   const getValues = (row: NFTItem) => {
-    const properties = Object.values(row.properties)
-    if (properties.length > 0) return Object.keys(row.properties).join(" | ")
+    const properties = row.properties
+    if (properties.length > 0)
+      return properties.map((item) => item.value).join(" | ")
     return "--"
+  }
+  const editItem = (id: number) => {
+    setDrawerItem(id)
+    toggleDrawer()
   }
   return (
     <tbody>
@@ -34,6 +43,7 @@ function TableBody({ rows }: Props) {
         rows.map((row) => (
           <tr
             key={row.id}
+            onClick={() => editItem(row.id)}
             style={{
               backgroundColor: selection.includes(row.id)
                 ? theme.colors.gray[1]
